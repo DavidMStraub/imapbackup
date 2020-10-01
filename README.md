@@ -13,8 +13,8 @@ python3 -m pip install --user imapbackup3
 
 ```
 usage: imapbackup3 [-h] [-y] [-f FOLDERS] [-e] [-k KEY] [-c CERT] -s HOST
-                   [-P PORT] -u USER [-p PASSWORD] [-m MAILBOX] [-t SECS]
-                   [--thunderbird]
+                   [-P PORT] -u USER [-p PASSWORD] [-m {mbox,maildir}]
+                   [-t SECS] [--thunderbird]
 
 Back up E-mail messages from an IMAP server. mbox files are created in the
 current working directory.
@@ -37,9 +37,8 @@ optional arguments:
                         Prompts for password if not specified. If the first
                         character is '@', treat the rest as a path to a file
                         containing the password. Leading '' makes it literal.
-  -m MAILBOX, --mailbox MAILBOX
-                        Local e-mail storage format. Possible values: mbox
-                        (default), Maildir
+  -m {mbox,maildir}, --mailbox {mbox,maildir}
+                        Local e-mail storage format. Default: mbox
   -t SECS, --timeout SECS
                         Sets socket timeout to SECS seconds.
   --thunderbird         Create Mozilla Thunderbird compatible mailbox
@@ -69,7 +68,7 @@ with IMAPBackup(
     certfilename='my_cert.pem',
     thunderbird=False,
     folders=['INBOX', 'INBOX.Sent'],
-    fmt='Maildir',
+    fmt='maildir',
 ) as imb:
     imb.download_all_messages()
 ```
@@ -94,7 +93,7 @@ imb.download_all_messages(msg_filter=my_filter)
 
 ## Background
 
-This package is based on a script by [Rui Carmo](https://github.com/rcarmo/imapbackup). Original description: 
+This package is based on a script by [Rui Carmo](https://github.com/rcarmo/imapbackup). Original description:
 
 > This was first published around 2007 (probably earlier) [on my personal site][tao], and it was originally developed to work around the then rather limited (ok, inconsistent) Mac OS X Mail.app functionality and allow me to back up my old mailboxes in a fully standard `mbox` format (well, at least as much as `mbox` can be considered a standard...).
 
