@@ -88,7 +88,8 @@ def get_config():
         "-m",
         "--mailbox",
         default="mbox",
-        help="Local e-mail storage format. Possible values: mbox (default), Maildir",
+        choices=["mbox", "maildir"],
+        help="Local e-mail storage format. Default: mbox",
     )
     parser.add_argument(
         "-t",
